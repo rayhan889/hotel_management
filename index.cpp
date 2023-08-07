@@ -22,7 +22,8 @@ class Room
     char size;
     bool isAc;
     int roomNumber;
-    bool isAvailable;
+    // 0 = available / 1 = unavailable;
+    int status;
 
     class Customer customer;
     class Room addRoom(int);
@@ -31,8 +32,24 @@ class Room
     void displayRoom(Room);    
 };
 
+Room Room::addRoom(int rnum)
+{
+    class Room room;
+    cout << "Room number: \n";
+    cin >> rnum;
+    cout << "\n Room type: ";
+    cin >> room.roomType;
+    cout << "\n Room size: ";
+    cin >> room.size;
+    cout << "\n AC Y/N: ";
+    cin >> room.isAc;
+    room.status = 0;
+
+    cout << "Room number: " << rnum << "Successfully added!";
+    return room;
+}
 
 int main()
 {
-    
+
 }

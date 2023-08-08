@@ -48,7 +48,50 @@ Room Room::addRoom(int rnum)
 
     cout << "\n Room number: " << rnum << "Successfully added!";
     return room;
-}
+};
+
+class Room rooms[max];
+int count = 0;
+
+void manageRooms()
+{
+    class Room room;
+    int opt,i,rnum, flag = 0;
+
+    system("cls");
+    cout<<"######## Manage Rooms #########\n";
+    cout<<"\n1. Add Room";
+    cout<<"\n2. Search Room";
+    cout<<"\n3. Back to main menu";
+    cout<<"\n\nEnter Option: ";
+
+    switch (opt)
+    {
+    case 1:
+        cout << "\nEnter room number: ";
+        cin >> rnum;
+        for (i = 0; i < count; i++)
+        {
+            if(rooms[i].roomNumber == rnum)
+            {
+                flag = 1;
+            }
+            if(flag == 1)
+            {
+                cout << "\nRoom with the number already present! Please enter another number";
+                flag = 0;
+                getch();
+            } else {
+                rooms[count] = room.addRoom(rnum);
+                count++;
+            }
+        }
+        break;
+    
+    default:
+        break;
+    }  
+};
 
 int main()
 {

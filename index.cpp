@@ -34,6 +34,9 @@ class Room
         void displayRoom(Room);    
 };
 
+class Room rooms[max];
+int count = 0;
+
 Room Room::addRoom(int rnum)
 {
     class Room room;
@@ -50,8 +53,30 @@ Room Room::addRoom(int rnum)
     return room;
 };
 
-class Room rooms[max];
-int count = 0;
+void Room::displayRoom(Room room)
+{
+    
+}
+
+void Room::searchRoom(int rnum)
+{
+    int i, found = 0;
+    for (i = 0; i < count; i++)
+    {
+        if(rooms[i].roomNumber == rnum)
+        {
+            found = 1;
+            break;
+        }     
+        if(found == 1)
+        {
+            displayRoom(rooms[i]);
+        } else {
+            cout << "\n Room not found!";
+        }
+    }
+    
+};
 
 void manageRooms()
 {
@@ -87,7 +112,12 @@ void manageRooms()
             }
         }
         break;
-    
+    case 2:
+        cout << "\nEnter room number: ";
+        cin >> rnum;
+
+        room.searchRoom(rnum);
+        break;
     default:
         break;
     }  

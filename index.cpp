@@ -2,8 +2,8 @@
 #include<string.h>
 #include<conio.h>
 
-#define max 100
 using namespace std;
+#define max 100
 
 class Customer
 {
@@ -34,8 +34,9 @@ class Room
         void displayRoom(Room);    
 };
 
+// global declaration
 class Room rooms[max];
-int count = 0;
+int countRooms = 0;
 
 Room Room::addRoom(int rnum)
 {
@@ -55,13 +56,22 @@ Room Room::addRoom(int rnum)
 
 void Room::displayRoom(Room room)
 {
-    
+    cout << "Room number: ";
+    room.roomNumber;
+    cout << "Room type: ";
+    room.roomType;
+    cout << "Room size: ";
+    room.size;
+    cout << "AC: ";
+    room.roomType;
+    cout << "Room status: ";
+    room.status;
 }
 
 void Room::searchRoom(int rnum)
 {
     int i, found = 0;
-    for (i = 0; i < count; i++)
+    for (i = 0; i < countRooms; i++)
     {
         if(rooms[i].roomNumber == rnum)
         {
@@ -90,37 +100,44 @@ void manageRooms()
     cout<<"\n3. Back to main menu";
     cout<<"\n\nEnter Option: ";
 
-    switch (opt)
+    do
     {
-    case 1:
-        cout << "\nEnter room number: ";
-        cin >> rnum;
-        for (i = 0; i < count; i++)
+        switch (opt)
         {
-            if(rooms[i].roomNumber == rnum)
+        case 1:
+            cout << "\nEnter room number: ";
+            cin >> rnum;
+            for (i = 0; i < countRooms; i++)
             {
-                flag = 1;
+                if(rooms[i].roomNumber == rnum)
+                {
+                    flag = 1;
+                }
+                if(flag == 1)
+                {
+                    cout << "\nRoom with the number already present! Please enter another number";
+                    flag = 0;
+                    getch();
+                } else {
+                    rooms[countRooms] = room.addRoom(rnum);
+                    countRooms++;
+                }
             }
-            if(flag == 1)
-            {
-                cout << "\nRoom with the number already present! Please enter another number";
-                flag = 0;
-                getch();
-            } else {
-                rooms[count] = room.addRoom(rnum);
-                count++;
-            }
-        }
-        break;
-    case 2:
-        cout << "\nEnter room number: ";
-        cin >> rnum;
+            break;
+        case 2:
+            cout << "\nEnter room number: ";
+            cin >> rnum;
 
-        room.searchRoom(rnum);
-        break;
-    default:
-        break;
-    }  
+            room.searchRoom(rnum);
+            break;
+        case 3:
+            break;
+        default:
+            cout << "\nPlease enter correct number";
+            break;
+        }  
+    } while (opt != 3);
+    
 };
 
 int main()

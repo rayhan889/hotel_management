@@ -22,7 +22,7 @@ class Room
     public:
         char roomType;
         char size;
-        bool isAc;
+        char isAc;
         int roomNumber;
         // 0 = available / 1 = unavailable;
         int status;
@@ -42,30 +42,26 @@ Room Room::addRoom(int rnum)
 {
     class Room room;
     room.roomNumber = rnum;
-    cout << "\n Room type: ";
+    cout << "\nRoom Type Deluxe/Standart (D/S) : ";
     cin >> room.roomType;
-    cout << "\n Room size: ";
+    cout << "\nRoom size Big/Small (B/S) : ";
     cin >> room.size;
-    cout << "\n AC Y/N: ";
+    cout << "\nAC AC/NO (A/N) : ";
     cin >> room.isAc;
     room.status = 0;
 
-    cout << "\n Room number: " << rnum << "Successfully added!";
+    cout << "Successfully add new room!";
+    getch();
     return room;
 };
 
 void Room::displayRoom(Room room)
 {
-    cout << "Room number: ";
-    room.roomNumber;
-    cout << "Room type: ";
-    room.roomType;
-    cout << "Room size: ";
-    room.size;
-    cout << "AC: ";
-    room.roomType;
-    cout << "Room status: ";
-    room.status;
+    cout<<"######## Room Details #########\n";
+    cout << "Room number: " << room.roomNumber;
+    cout << "Type Comfort: " << room.roomType;
+    cout << "Room Size: " << room.size;
+    cout << "AC (Y/N): " << room.isAc;
 }
 
 void Room::searchRoom(int rnum)
@@ -78,12 +74,14 @@ void Room::searchRoom(int rnum)
             found = 1;
             break;
         }     
-        if(found == 1)
-        {
-            displayRoom(rooms[i]);
-        } else {
-            cout << "\n Room not found!";
-        }
+    }
+    if(found == 1)
+    {
+        displayRoom(rooms[i]);
+        getch();
+    } else {
+        cout << "\nRoom not found!";
+        getch();
     }
     
 };
@@ -93,15 +91,16 @@ void manageRooms()
     class Room room;
     int opt,i,rnum, flag = 0;
 
-    system("cls");
-    cout<<"######## Manage Rooms #########\n";
-    cout<<"\n1. Add Room";
-    cout<<"\n2. Search Room";
-    cout<<"\n3. Back to main menu";
-    cout<<"\n\nEnter Option: ";
 
     do
     {
+        system("cls");
+        cout<<"######## Manage Rooms #########\n";
+        cout<<"\n1. Add Room";
+        cout<<"\n2. Search Room";
+        cout<<"\n3. Back to main menu";
+        cout<<"\n\nEnter Option: ";
+        cin >> opt;
         switch (opt)
         {
         case 1:
@@ -112,16 +111,18 @@ void manageRooms()
                 if(rooms[i].roomNumber == rnum)
                 {
                     flag = 1;
+                    break;
                 }
-                if(flag == 1)
-                {
-                    cout << "\nRoom with the number already present! Please enter another number";
-                    flag = 0;
-                    getch();
-                } else {
-                    rooms[countRooms] = room.addRoom(rnum);
-                    countRooms++;
-                }
+            }
+            if(flag == 1)
+            {
+                cout << "\nRoom with the number already present! Please enter another number";
+                flag = 0;
+                getch();
+            } else {
+                rooms[countRooms] = room.addRoom(rnum);
+                countRooms++;
+                break;
             }
             break;
         case 2:
@@ -140,18 +141,37 @@ void manageRooms()
     
 };
 
+
+
 int main()
 {
-    system("cls");
-    cout<<"######## Hotel Management #########\n";
-    cout<<"\n1. Manage Rooms";
-    cout<<"\n2. Check-In Room";
-    cout<<"\n3. Available Rooms";
-    cout<<"\n4. Search Customer";
-    cout<<"\n5. Check-Out Room";
-    cout<<"\n6. Guest Summary Report";
-    cout<<"\n7. Exit";
-    cout<<"\n\nEnter Option: ";
+    int opt = 0;
+
+    do
+    {
+        system("cls");
+        cout<<"######## Hotel Management #########\n";
+        cout<<"\n1. Manage Rooms";
+        cout<<"\n2. Check-In Room";
+        cout<<"\n3. Available Rooms";
+        cout<<"\n4. Search Customer";
+        cout<<"\n5. Check-Out Room";
+        cout<<"\n6. Guest Summary Report";
+        cout<<"\n7. Exit";
+        cout<<"\n\nEnter Option: ";
+        cin >> opt;
+
+        switch (opt)
+        {
+        case 1:
+            manageRooms();
+            break;
+        
+        default:
+            break;
+        }
+    } while (opt != 7);
+    
 
     return 0;
 };
